@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>飞行的小鸟</title>
+  <style>
+    div {
+      text-align: center;
+    }
+    canvas {
+      display: block;
+      margin: 0 auto;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top">
+    <p>在键盘上按下enter键开始游戏</p>
+    <p>空格键可以暂停和开始游戏</p>
+    <p>键盘上↑控制向上的方向、键盘上↓控制向下的方向、键盘上→控制向右的方向、键盘上←控制向左的方向</p>
+    <h1></h1>
+  </div>
+  <canvas width="600" height="400"></canvas>
+  <script src="./js/bird.js"></script>
+  <script src="./js/sky.js"></script>
+  <script src="./js/land.js"></script>
+  <script src="./js/pipe.js"></script>
+  <script src="./js/game.js"></script>
+  <script>
+    window.onload = function () {
+      let canvas = document.querySelector('canvas');
+      let h1 = document.querySelector('h1')
+      let ctx = canvas.getContext('2d');
+      // 天空
+      let sky = new Sky(ctx);
+      // 陆地 
+      let land = new Land(ctx);
+      // 水管
+      let pipe = new Pipe(ctx);
+      // 小鸟
+      let bird = new Bird(ctx);
+      // 游戏类
+      let game = new Game({ sky, land, pipe, bird });
+      game.init();
+      document.onkeyup = function (e) {
+        game.start(e.keyCode);
+      }
+    }
+  </script>
+</body>
+
+</html>
