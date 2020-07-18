@@ -22,9 +22,11 @@
     <p>在键盘上按下enter键开始游戏</p>
     <p>空格键可以暂停和开始游戏</p>
     <p>键盘上↑控制向上的方向、键盘上↓控制向下的方向、键盘上→控制向右的方向、键盘上←控制向左的方向</p>
-    <h1></h1>
   </div>
   <canvas width="600" height="400"></canvas>
+  <div class="btn">
+    <button class="start">开始游戏</button>
+  </div>
   <script src="./js/bird.js"></script>
   <script src="./js/sky.js"></script>
   <script src="./js/land.js"></script>
@@ -33,7 +35,7 @@
   <script>
     window.onload = function () {
       let canvas = document.querySelector('canvas');
-      let h1 = document.querySelector('h1')
+      let startbtn = document.querySelector('.start')
       let ctx = canvas.getContext('2d');
       // 天空
       let sky = new Sky(ctx);
@@ -47,8 +49,14 @@
       let game = new Game({ sky, land, pipe, bird });
       game.init();
       document.onkeyup = function (e) {
-        game.start(e.keyCode);
+        game.getKey(e.keyCode);
+        game.start();
+        game.pause();
       }
+      startbtn.addEventListener('click', function() {
+        console.log('调用了点击事件')
+        // game.move();
+      })
     }
   </script>
 </body>
